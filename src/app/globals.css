@@ -55,72 +55,30 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --radius: 0.75rem;
+  --background: #0f0e2a;
+  --foreground: #e8e4f0;
+  --card: rgba(255, 255, 255, 0.04);
+  --card-foreground: #e8e4f0;
+  --popover: #1a1640;
+  --popover-foreground: #e8e4f0;
+  --primary: #c4a060;
+  --primary-foreground: #0f0e2a;
+  --secondary: rgba(255, 255, 255, 0.06);
+  --secondary-foreground: #e8e4f0;
+  --muted: rgba(255, 255, 255, 0.04);
+  --muted-foreground: #9b95ad;
+  --accent: rgba(196, 160, 96, 0.15);
+  --accent-foreground: #c4a060;
+  --destructive: #e87170;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: rgba(196, 160, 96, 0.4);
+  --chart-1: #a78bfa;
+  --chart-2: #93c5fd;
+  --chart-3: #86efac;
+  --chart-4: #fca5a5;
+  --chart-5: #fdba74;
 }
 
 @layer base {
@@ -134,4 +92,182 @@
 
 body {
   @apply font-sans;
+  background: linear-gradient(160deg, #0f0e2a 0%, #1a1640 50%, #12102e 100%);
+  min-height: 100vh;
+}
+
+/* ============ 安定区自定义样式 ============ */
+
+/* 星空背景粒子 */
+.starry-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.starry-bg::before,
+.starry-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(196, 160, 96, 0.15);
+  animation: float-glow 8s ease-in-out infinite;
+}
+
+.starry-bg::before {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  right: -50px;
+  filter: blur(80px);
+}
+
+.starry-bg::after {
+  width: 200px;
+  height: 200px;
+  bottom: 20%;
+  left: -30px;
+  filter: blur(60px);
+  animation-delay: 4s;
+}
+
+@keyframes float-glow {
+  0%, 100% { opacity: 0.3; transform: translateY(0); }
+  50% { opacity: 0.6; transform: translateY(-20px); }
+}
+
+/* 消息气泡动画 */
+@keyframes message-appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-appear {
+  animation: message-appear 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* 打字指示器动画 */
+@keyframes typing-dot {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.typing-dot:nth-child(1) { animation: typing-dot 1.2s ease-in-out infinite; }
+.typing-dot:nth-child(2) { animation: typing-dot 1.2s ease-in-out 0.2s infinite; }
+.typing-dot:nth-child(3) { animation: typing-dot 1.2s ease-in-out 0.4s infinite; }
+
+/* 毛玻璃效果 */
+.glass-ai {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-user {
+  background: rgba(196, 160, 96, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(196, 160, 96, 0.15);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-input:focus-within {
+  border-color: rgba(196, 160, 96, 0.3);
+  box-shadow: 0 0 0 3px rgba(196, 160, 96, 0.1);
+}
+
+/* 危机模式样式 */
+.crisis-card {
+  background: rgba(232, 113, 112, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(232, 113, 112, 0.2);
+}
+
+/* 情绪强度条 */
+.emotion-bar {
+  background: linear-gradient(90deg, var(--bar-color, #a78bfa), transparent);
+  border-radius: 999px;
+  height: 6px;
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 滚动条美化 */
+.chat-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.chat-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+}
+
+.chat-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* 淡入动画 */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fade-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* 摘要卡片动画 */
+@keyframes card-appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card-appear {
+  animation: card-appear 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* 按钮悬停效果 */
+.btn-hover {
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-hover:hover {
+  filter: brightness(1.1);
+}
+
+.btn-hover:active {
+  filter: brightness(0.95);
+  transform: scale(0.98);
 }

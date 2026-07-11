@@ -19,10 +19,19 @@
 │   └── start.sh            # 生产环境启动脚本
 ├── src/
 │   ├── app/                # 页面路由与布局
-│   ├── components/ui/      # Shadcn UI 组件库
+│   │   ├── page.tsx        # 主对话页面（聊天界面）
+│   │   ├── layout.tsx      # 全局布局
+│   │   └── globals.css     # 全局样式（夜空主题、毛玻璃效果、动画）
+│   ├── components/
+│   │   ├── ui/             # Shadcn UI 组件库
+│   │   ├── ChatBubble.tsx  # 聊天气泡组件
+│   │   ├── TypingIndicator.tsx # 打字指示器（正在倾听...）
+│   │   ├── CrisisCard.tsx  # 危机预警卡片
+│   │   └── EmotionSummaryCard.tsx # 情绪摘要卡片
 │   ├── hooks/              # 自定义 Hooks
-│   ├── lib/                # 工具库
-│   │   └── utils.ts        # 通用工具函数 (cn)
+│   ├── lib/
+│   │   ├── utils.ts        # 通用工具函数 (cn)
+│   │   └── emotion-engine.ts # 情绪识别引擎（关键词匹配、治愈策略、危机检测）
 │   └── server.ts           # 自定义服务端入口
 ├── next.config.ts          # Next.js 配置
 ├── package.json            # 项目依赖管理
@@ -63,3 +72,18 @@
 
 - 模板默认预装核心组件库 `shadcn/ui`，位于`src/components/ui/`目录下
 - Next.js 项目**必须默认**采用 shadcn/ui 组件、风格和规范，**除非用户指定用其他的组件和规范。**
+
+## 安定区核心模块
+
+### 情绪识别引擎 (`src/lib/emotion-engine.ts`)
+- 基于关键词匹配的情绪分类（焦虑/疲惫/迷茫/孤独/自我否定）
+- 强信号直接归类，弱信号需命中2个以上
+- 置信度分级：high（2+强信号）、medium（1强+1弱）、low（仅弱信号）
+- 危机关键词检测（最高优先级）
+- localStorage 持久化对话历史和情绪记录
+
+### 设计风格 (`DESIGN.md`)
+- 夜空渐变背景（#0f0e2a → #1a1640）
+- 毛玻璃气泡效果（glass-ai / glass-user）
+- 柔和淡入动画（message-appear, fade-in）
+- 琥珀金强调色（#c4a060）
