@@ -96,7 +96,7 @@ body {
   min-height: 100vh;
 }
 
-/* ============ 安定区自定义样式 ============ */
+/* ============ Anteiku 自定义样式 ============ */
 
 /* 星空背景粒子 */
 .starry-bg {
@@ -270,4 +270,96 @@ body {
 .btn-hover:active {
   filter: brightness(0.95);
   transform: scale(0.98);
+}
+
+/* ============ 预设选项按钮 ============ */
+.preset-btn {
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.preset-btn:hover {
+  transform: scale(1.04);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #e8e4f0;
+}
+
+.preset-btn:active {
+  transform: scale(0.97);
+}
+
+/* ============ 品牌展示动画 ============ */
+@keyframes brand-splash-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes brand-splash-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.05) translateY(-10px);
+  }
+}
+
+.brand-splash {
+  animation: brand-splash-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+             brand-splash-out 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1.4s forwards;
+}
+
+@keyframes logo-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(196, 160, 96, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px 10px rgba(196, 160, 96, 0.1);
+  }
+}
+
+.brand-logo-pulse {
+  animation: logo-pulse 2s ease-in-out infinite;
+}
+
+/* ============ 打字机光标 ============ */
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: #c4a060;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink-cursor 0.8s step-end infinite;
+}
+
+/* ============ 预设选项淡入 ============ */
+@keyframes presets-appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.presets-appear {
+  animation: presets-appear 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }

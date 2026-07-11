@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import type { ChatMessage } from '@/lib/emotion-engine';
 import { getEmotionColor } from '@/lib/emotion-engine';
 
@@ -8,16 +9,36 @@ interface ChatBubbleProps {
 }
 
 /**
- * 聊天气泡组件
+ * 聊天气泡组件（支持打字机效果）
  */
 export function ChatBubble({ message }: ChatBubbleProps) {
   const isAI = message.role === 'ai';
+  const [displayedText, setDisplayedText] = useState(message.isTypewriter ? '' : message.content);
+  const [isTypingDone, setIsTypingDone] = useState(!message.isTypewriter);
+
+  // 打字机效果
+  useEffect(() => {
+    if (!message.isTypewriter || isTypingDone) return;
+
+    let index = 0;
+    const text = message.content;
+    const interval = setInterval(() => {
+      index++;
+      setDisplayedText(text.slice(0, index));
+      if (index >= text.length) {
+        clearInterval(interval);
+        setIsTypingDone(true);
+      }
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [message.isTypewriter, message.content, isTypingDone]);
 
   return (
     <div
       className={`flex items-end gap-2 message-appear ${isAI ? '' : 'flex-row-reverse'}`}
     >
-      {/* 头像 */}
+      {/* AI 头像 */}
       {isAI && (
         <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 bg-gradient-to-br from-[#2a2555] to-[#1a1640] border border-white/10">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[#c4a060]">
@@ -37,9 +58,14 @@ export function ChatBubble({ message }: ChatBubbleProps) {
           }
         `}
       >
-        <p className="whitespace-pre-wrap">{message.content}</p>
+        <p className="whitespace-pre-wrap">
+          {displayedText}
+          {message.isTypewriter && !isTypingDone && (
+            <span className="typewriter-cursor" />
+          )}
+        </p>
         {/* 情绪标签 */}
-        {message.emotion && message.emotion.emotion !== 'unknown' && isAI && (
+        {message.emotion && message.emotion.emotion !== 'unknown' && isAI && isTypingDone && (
           <div className="mt-2 flex items-center gap-1.5">
             <span
               className="inline-block w-1.5 h-1.5 rounded-full"

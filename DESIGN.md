@@ -1,4 +1,4 @@
-# DESIGN.md - 安定区
+# DESIGN.md - Anteiku
 
 ## 气质与意象
 
